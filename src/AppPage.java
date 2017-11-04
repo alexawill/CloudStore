@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
 import javax.swing.JMenuBar;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
