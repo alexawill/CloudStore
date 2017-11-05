@@ -66,13 +66,13 @@ public class LoginPanel {
 		JButton btnLogIn = new JButton("LOG IN");
 		btnLogIn.setBackground(Color.LIGHT_GRAY);
 		btnLogIn.setForeground(Color.BLACK);
-		btnLogIn.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		btnLogIn.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		btnLogIn.setBounds(362, 276, 113, 27);
 		panel.add(btnLogIn);
 		
 		JButton btnCreateAccout = new JButton("Create Accout");
 		btnCreateAccout.setBackground(Color.LIGHT_GRAY);
-		btnCreateAccout.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		btnCreateAccout.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		btnCreateAccout.setBounds(404, 366, 156, 27);
 		panel.add(btnCreateAccout);
 		
@@ -87,12 +87,12 @@ public class LoginPanel {
 		textField.setColumns(10);
 		
 		JLabel lblUserName = new JLabel("User name");
-		lblUserName.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		lblUserName.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		lblUserName.setBounds(222, 159, 92, 18);
 		panel.add(lblUserName);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		lblPassword.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		lblPassword.setBounds(222, 214, 72, 18);
 		panel.add(lblPassword);
 		
@@ -101,7 +101,7 @@ public class LoginPanel {
 		lblLogInPage.setForeground(Color.BLUE);
 		lblLogInPage.setBounds(335, 74, 158, 51);
 		panel.add(lblLogInPage);
-		lblLogInPage.setFont(new Font("»ªÎÄçúçê", Font.BOLD, 40));
+		lblLogInPage.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 40));
 		btnCreateAccout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -125,12 +125,7 @@ public class LoginPanel {
 					nw.NewScreen();
 					
 				}
-				catch(Exception p) {}
-				
-				
-			
-				
-				
+				catch(Exception p) {}				
 				
 			}
 		});

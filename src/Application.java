@@ -5,28 +5,28 @@ public class Application {
 	public String type, name, developer, description, platform;
 	public int downloads;
 	public double version, price;
-	public static ArrayList<Integer> ratings = new ArrayList<>();
+	public static ArrayList<Double> ratings = new ArrayList<>();
 	public static ArrayList<String> comments = new ArrayList<>();
 
-	public Application(String type, String name, String developer, String description, String platform, int downloads,
-			double version, double price, ArrayList ratings, ArrayList comments) {
+	public Application(String type, String name, String developer, String description, String platform, 
+			double version, double price) {
 		super();
 		this.type = type;
 		this.name = name;
 		this.developer = developer;
 		this.description = description;
 		this.platform = platform;
-		this.downloads = downloads;
+		downloads = 0;
 		this.version = version;
 		this.price = price;
-		this.ratings = ratings;
-		this.comments = comments;
+		ratings = new ArrayList<Double>();
+		comments = new ArrayList<String>();
 	}
 
 
 	// Methods
 	
-	public static void addRating(int rate) {
+	public static void addRating(double rate) {
 	
 
 		ratings.add(rate);
@@ -125,12 +125,12 @@ public class Application {
 	}
 
 
-	public static ArrayList<Integer> getRatings() {
+	public static ArrayList<Double> getRatings() {
 		return ratings;
 	}
 
 
-	public static void setRatings(ArrayList<Integer> ratings) {
+	public static void setRatings(ArrayList<Double> ratings) {
 		Application.ratings = ratings;
 	}
 
@@ -158,10 +158,4 @@ public class Application {
 		System.out.println("Version : " + another.getVersion());
 	}
 	
-	
-	
-
-
-	
-
 }

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 
@@ -17,6 +18,7 @@ public class MainPage extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private ArrayList<Application> apps = new ArrayList<Application>();
 
 	/**
 	 * Launch the application.
