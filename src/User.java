@@ -57,7 +57,7 @@ public class User {
 		 catch(Exception p) {}
 		
 	}
-	public static void addRating(Application a, int rate){
+	public static void addRating(Application a, double rate){
 		a.getRatings().add(rate);
 	}
 	public static void addComment(Application a, String comment){

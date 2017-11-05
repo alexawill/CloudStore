@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -58,12 +57,12 @@ public class CreatePage extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewUserName = new JLabel("New User Name");
-		lblNewUserName.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		lblNewUserName.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		lblNewUserName.setBounds(43, 107, 117, 18);
 		panel.add(lblNewUserName);
 		
 		JLabel lblNewPassword = new JLabel("New Password");
-		lblNewPassword.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		lblNewPassword.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		lblNewPassword.setBounds(43, 160, 117, 18);
 		panel.add(lblNewPassword);
 		
@@ -82,7 +81,7 @@ public class CreatePage extends JFrame {
 		JLabel lblSignUp = new JLabel("SIGN UP");
 		lblSignUp.setForeground(Color.BLUE);
 		lblSignUp.setBackground(Color.BLUE);
-		lblSignUp.setFont(new Font("»ªÎÄçúçê", Font.BOLD, 40));
+		lblSignUp.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 40));
 		lblSignUp.setBounds(135, 13, 157, 71);
 		panel.add(lblSignUp);
 		
@@ -91,7 +90,7 @@ public class CreatePage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				JLabel lblUserNameAlready = new JLabel("user name already taken");
-				lblUserNameAlready.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+				lblUserNameAlready.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 				lblUserNameAlready.setForeground(Color.RED);
 				lblUserNameAlready.setBounds(196, 126, 207, 18);
 				
@@ -140,12 +139,12 @@ public class CreatePage extends JFrame {
 		});
 		btnOk.setForeground(Color.BLACK);
 		btnOk.setBackground(Color.LIGHT_GRAY);
-		btnOk.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		btnOk.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		btnOk.setBounds(153, 233, 113, 27);
 		panel.add(btnOk);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		btnBack.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		btnBack.setBackground(Color.LIGHT_GRAY);
 		btnBack.setBounds(306, 327, 113, 27);
 		panel.add(btnBack);
