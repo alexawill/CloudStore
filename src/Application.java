@@ -2,14 +2,13 @@ import java.util.ArrayList;
 
 public class Application {
 
-	public String type, name, developer, description, platform;
+	public String type, name, developer, description, platform, version, price;
 	public int downloads;
-	public double version, price;
 	public static ArrayList<Double> ratings = new ArrayList<>();
 	public static ArrayList<String> comments = new ArrayList<>();
 
 	public Application(String type, String name, String developer, String description, String platform, 
-			double version, double price) {
+			String version, String price) {
 		super();
 		this.type = type;
 		this.name = name;
@@ -105,22 +104,22 @@ public class Application {
 	}
 
 
-	public double getVersion() {
+	public String getVersion() {
 		return version;
 	}
 
 
-	public void setVersion(double version) {
+	public void setVersion(String version) {
 		this.version = version;
 	}
 
 
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 

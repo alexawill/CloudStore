@@ -78,6 +78,11 @@ public class MainPage extends JFrame{
 		panel.add(btnEnter);
 		
 		JButton btnCompare = new JButton("Compare");
+		btnCompare.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ComparePage.launchPage();
+			}
+		});
 		btnCompare.setBounds(335, 316, 117, 29);
 		panel.add(btnCompare);
 	}
