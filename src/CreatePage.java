@@ -1,4 +1,6 @@
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +17,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 import java.io.RandomAccessFile;
 
 
@@ -28,7 +31,7 @@ public class CreatePage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void createPage() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -40,12 +43,18 @@ public class CreatePage extends JFrame {
 			}
 		});
 	}
+	
+	public void close(){
+		WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+	    Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public CreatePage() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 451, 414);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,12 +66,12 @@ public class CreatePage extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewUserName = new JLabel("New User Name");
-		lblNewUserName.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
+		lblNewUserName.setFont(new Font("ËÎÌå", Font.BOLD, 15));
 		lblNewUserName.setBounds(43, 107, 117, 18);
 		panel.add(lblNewUserName);
 		
 		JLabel lblNewPassword = new JLabel("New Password");
-		lblNewPassword.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
+		lblNewPassword.setFont(new Font("ËÎÌå", Font.BOLD, 15));
 		lblNewPassword.setBounds(43, 160, 117, 18);
 		panel.add(lblNewPassword);
 		
@@ -81,7 +90,7 @@ public class CreatePage extends JFrame {
 		JLabel lblSignUp = new JLabel("SIGN UP");
 		lblSignUp.setForeground(Color.BLUE);
 		lblSignUp.setBackground(Color.BLUE);
-		lblSignUp.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 40));
+		lblSignUp.setFont(new Font("»ªÎÄçúçê", Font.BOLD, 40));
 		lblSignUp.setBounds(135, 13, 157, 71);
 		panel.add(lblSignUp);
 		
@@ -89,14 +98,9 @@ public class CreatePage extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				JLabel lblUserNameAlready = new JLabel("user name already taken");
-				lblUserNameAlready.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
-				lblUserNameAlready.setForeground(Color.RED);
-				lblUserNameAlready.setBounds(196, 126, 207, 18);
-				
-				System.out.println("Check1");
+//				System.out.println("Check1");
 				try{
-					System.out.println("Check2");
+//					System.out.println("Check2");
 					RandomAccessFile out = new RandomAccessFile("UserData.txt","rw");
 					RandomAccessFile in = new RandomAccessFile("UserData.txt","rw");
 					long length = out.length();
@@ -104,28 +108,27 @@ public class CreatePage extends JFrame {
 					int check2 = 0;
 					for(int i = 0; i < length; i++){
 						String temp = in.readLine();
-						System.out.println("Check3 + length : " + length);
+						if(temp == null)	break;
 						if(temp.equals(textField.getText())){
-//							check = 1;
-							panel.add(lblUserNameAlready);
-							System.out.println("Check4");
+							check = 1;
 							break;
 						}
 						in.readLine();
 					}
-					System.out.println("Check" + check);
-					if(check == 0 && textField.getText() != (null)&& textField_1.getText() != (null)){
+					in.close();
+					
+					String x = textField.getText() , y = textField_1.getText();
+					
+					if(!x.equals("") && !y.equals("")  && check == 0){
 					    User nuser = new User();
 					    nuser.setUserName(textField.getText());
 					    nuser.setPassword(textField_1.getText());
 					}
-					if(length == 0) check = 2;
-//					if(check == 1){
-//						panel.add(lblUserNameAlready);
-//					}
-					else if(check == 0){
-						lblUserNameAlready = new JLabel("");
-						panel.add(lblUserNameAlready);
+					if(textField.getText().equals("") || textField_1.getText().equals("") || length == 0) {
+						check2 = 2;
+					}
+					
+					if(check == 0 && check2 == 0){
 						CreateDone c = new CreateDone();
 						c.createDone();
 					}
@@ -139,12 +142,19 @@ public class CreatePage extends JFrame {
 		});
 		btnOk.setForeground(Color.BLACK);
 		btnOk.setBackground(Color.LIGHT_GRAY);
-		btnOk.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
+		btnOk.setFont(new Font("ËÎÌå", Font.BOLD, 15));
 		btnOk.setBounds(153, 233, 113, 27);
 		panel.add(btnOk);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				close();
+				LoginPage lp = new LoginPage();
+				lp.loginPage();
+			}
+		});
+		btnBack.setFont(new Font("ËÎÌå", Font.BOLD, 15));
 		btnBack.setBackground(Color.LIGHT_GRAY);
 		btnBack.setBounds(306, 327, 113, 27);
 		panel.add(btnBack);
