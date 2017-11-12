@@ -1,13 +1,21 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class CreateDone extends JFrame {
@@ -33,9 +41,15 @@ public class CreateDone extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
 	 */
+	public void close(){
+		WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+	    Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	}
+	
 	public CreateDone() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,6 +72,11 @@ public class CreateDone extends JFrame {
 		panel.add(lblYourAccoutCreate);
 		
 		JButton btnBackToLogin = new JButton("Back to Login Page");
+		btnBackToLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				close();
+			}
+		});
 		btnBackToLogin.setBackground(Color.LIGHT_GRAY);
 		btnBackToLogin.setFont(new Font("ËÎÌו", Font.BOLD, 15));
 		btnBackToLogin.setBounds(107, 165, 208, 27);
