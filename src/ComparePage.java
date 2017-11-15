@@ -151,12 +151,12 @@ public class ComparePage extends JFrame {
 				String n2 = (String) comboBox.getSelectedItem();
 				Application app1 = getAppByName(n1);
 				Application app2 = getAppByName(n2);
-				name1.setText(app1.getName());
-				name2.setText(app2.getName());
-				type1.setText(app1.getType());
-				type2.setText(app2.getType());
-				price1.setText(app1.getPrice());
-				price2.setText(app2.getPrice());
+				name1.setText("Name: " + app1.getName());
+				name2.setText("Name: " + app2.getName());
+				type1.setText("Type: " + app1.getType());
+				type2.setText("Type: " + app2.getType());
+				price1.setText("Price: " + app1.getPrice());
+				price2.setText("Price: " + app2.getPrice());
 			}
 
 			

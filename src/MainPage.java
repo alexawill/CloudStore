@@ -30,16 +30,18 @@ public class MainPage extends JFrame{
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
-	public JTextField textField_1;
+	private JTextField textField_1;
+	private User user;
 	
 	/**
 	 * Launch the application.
+	 * @param user the current user
 	 */
-	public static void mainPage() {
+	public static void mainPage(User user) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainPage frame = new MainPage();
+					MainPage frame = new MainPage(user);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +62,8 @@ public class MainPage extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public MainPage() {
+	public MainPage(User user) {
+		this.user = user;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(300, 100, 892, 580);
 		contentPane = new JPanel();
@@ -74,7 +77,7 @@ public class MainPage extends JFrame{
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("Search Bar");
-		label.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		label.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		label.setBounds(202, 17, 98, 18);
 		panel.add(label);
 		
@@ -85,13 +88,13 @@ public class MainPage extends JFrame{
 		textField.setColumns(10);
 		
 		JLabel lblCloudStore = new JLabel("Cloud Store");
-		lblCloudStore.setBounds(14, -4, 154, 50);
+		lblCloudStore.setBounds(14, -4, 176, 50);
 		lblCloudStore.setFont(new Font("MS UI Gothic", Font.BOLD, 26));
 		panel.add(lblCloudStore);
 		
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.setBackground(Color.LIGHT_GRAY);
-		btnEnter.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		btnEnter.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		btnEnter.setBounds(519, 13, 113, 27);
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -126,7 +129,7 @@ public class MainPage extends JFrame{
 			}
 		});
 		btnLogOut.setBackground(Color.LIGHT_GRAY);
-		btnLogOut.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		btnLogOut.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		btnLogOut.setBounds(723, 13, 113, 27);
 		panel.add(btnLogOut);
 		
@@ -137,7 +140,7 @@ public class MainPage extends JFrame{
 		table = new JTable();
 		table.setEnabled(false);
 		table.setFillsViewportHeight(true);
-		table.setFont(new Font("ËÎÌå", Font.PLAIN, 15));
+		table.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 15));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
@@ -176,5 +179,18 @@ public class MainPage extends JFrame{
 		});
 		btnSearch.setBounds(519, 50, 113, 27);
 		panel.add(btnSearch);
+		
+		JButton btnCompare = new JButton("Compare");
+		btnCompare.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ComparePage.launchPage();
+			}
+		});
+		btnCompare.setBounds(759, 522, 117, 29);
+		panel.add(btnCompare);
+		
+		JLabel welcomeLabel = new JLabel("Hello " + user.getUserName() + "!");
+		welcomeLabel.setBounds(14, 55, 157, 16);
+		panel.add(welcomeLabel);
 	}
 }

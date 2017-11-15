@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
@@ -18,14 +17,15 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
-import java.io.RandomAccessFile;
+import java.io.File;
+import java.util.Scanner;
 
 
 public class LoginPage extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField userNameField;
+	private JTextField passwordField;
 
 	/**
 	 * Launch the application.
@@ -66,64 +66,80 @@ public class LoginPage extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblLogIn = new JLabel("LOG IN");
-		lblLogIn.setBounds(331, 113, 127, 42);
-		lblLogIn.setFont(new Font("»ªÎÄçúçê", Font.BOLD, 40));
+		lblLogIn.setBounds(292, 119, 182, 42);
+		lblLogIn.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 40));
 		lblLogIn.setForeground(Color.BLUE);
 		panel.add(lblLogIn);
 		
+		JLabel infoLogin = new JLabel("");
+		infoLogin.setBounds(260, 173, 230, 16);
+		panel.add(infoLogin);
+		
 		JLabel lblUserName = new JLabel("User Name");
-		lblUserName.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		lblUserName.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		lblUserName.setBounds(260, 204, 87, 18);
 		panel.add(lblUserName);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		lblPassword.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		lblPassword.setBounds(260, 253, 87, 18);
 		panel.add(lblPassword);
 		
-		textField = new JTextField();
-		textField.setBounds(361, 201, 182, 24);
-		panel.add(textField);
-		textField.setColumns(10);
+		userNameField = new JTextField();
+		userNameField.setBounds(361, 201, 182, 24);
+		panel.add(userNameField);
+		userNameField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(361, 253, 182, 24);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		passwordField = new JTextField();
+		passwordField.setBounds(361, 253, 182, 24);
+		panel.add(passwordField);
+		passwordField.setColumns(10);
 		
 		JButton btnLogIn = new JButton("LOG IN");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				User user = new User();
 				try{
 					
-				RandomAccessFile in = new RandomAccessFile("UserData.txt","rw");
-					long length = in.length();
-					for(int i = 0; i < length ; i++){
-						if(in.readLine().equals(textField.getText())){
-							if(in.readLine().equals(textField_1.getText())){
-								break;
+				Scanner in = new Scanner(new File("UserData.txt"));
+					User user = new User();
+					while(in.hasNextLine()){
+						String username = in.nextLine();
+						String password = in.nextLine();
+						String role = in.nextLine();
+						if(username.equals(userNameField.getText()) && 
+								password.equals(passwordField.getText())){
+							if (role.equals("admin")){
+								user = new Admin(username, password);
 							}
+							else if (role.equals("admin")){
+								user = new Moderator(username, password);
+							}
+							else{
+								user = new User(username, password);
+							}
+							MainPage.mainPage(user);
 						}
 					}
-					close();
-					MainPage nw = new MainPage();
-					nw.mainPage();
+					in.close();
+					
 					
 				}
-				catch(Exception p) {}
+				catch(Exception p) {
+					infoLogin.setText("Wrong username/password");
+					infoLogin.setForeground(Color.RED);
+				}
 				
 				
 			}
 		});
-		btnLogIn.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		btnLogIn.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
 		btnLogIn.setBackground(Color.LIGHT_GRAY);
 		btnLogIn.setBounds(361, 308, 113, 27);
 		panel.add(btnLogIn);
 		
-		JButton btnCreateAccoute = new JButton("Create Accoute");
-		btnCreateAccoute.addActionListener(new ActionListener() {
+		JButton btnCreateAccount = new JButton("Create Account");
+		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				close();
@@ -133,9 +149,10 @@ public class LoginPage extends JFrame {
 				
 			}
 		});
-		btnCreateAccoute.setBackground(Color.LIGHT_GRAY);
-		btnCreateAccoute.setFont(new Font("ËÎÌå", Font.BOLD, 15));
-		btnCreateAccoute.setBounds(376, 426, 167, 27);
-		panel.add(btnCreateAccoute);
+		btnCreateAccount.setBackground(Color.LIGHT_GRAY);
+		btnCreateAccount.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 15));
+		btnCreateAccount.setBounds(376, 426, 167, 27);
+		panel.add(btnCreateAccount);
+		
 	}
 }
