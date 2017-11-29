@@ -10,20 +10,22 @@ public class JUnit2 {
 	public void test() {
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
-		Application test=new Application("for computer","mail","test","communition","ios",100,2.0,3.2,ratings,comments);
+		Application test=new Application(null, null, null, null, null, 0, 0, 0, comments, comments);
 			test.setType("for computer");
 			assertTrue(test.getType()=="for computer");
 			
 }
+	@Test
 	public void setname(){
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
-		Application test2=new Application("for computer","mail","test","communition","ios",100,2.0,3.2,ratings,comments);
-		test2.setName("mail");
-		assertTrue(test2.getName()=="mail");
+		Application test1=new Application(null, "mail", null, null, null, 0, 0, 0, comments, comments);
+		
+		assertEquals("mail",test1.getName());
 		
 		
 	}
+	@Test
 	public void setdeveloper(){
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
@@ -32,7 +34,7 @@ public class JUnit2 {
 		assertTrue(test3.getDeveloper()=="lll");
 		
 	}
-	
+	@Test
 	public void setdecription(){
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
@@ -41,6 +43,7 @@ public class JUnit2 {
 		assertTrue(test4.getDescription()=="communition");
 		
 	}
+	@Test
 	public void setplatform(){
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
@@ -50,6 +53,7 @@ public class JUnit2 {
 		
 		
 	}
+	@Test
 	public void downoads(){
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
@@ -59,6 +63,7 @@ public class JUnit2 {
 		assertTrue(test6.getDownloads()==100);
 		
 	}
+	@Test
 	public void version(){
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
@@ -67,6 +72,7 @@ public class JUnit2 {
 		assertTrue(test7.getVersion()==2.5);
 		
 	}
+	@Test
 	public void price(){
 		ArrayList<Integer> ratings = new ArrayList<>();
 		ArrayList<String> comments = new ArrayList<>();
@@ -74,8 +80,7 @@ public class JUnit2 {
 		test8.setPrice(3.33);
 		assertTrue(test8.getPrice()==3.33);
 	}
-	
-	
+
 	
 	
 	
