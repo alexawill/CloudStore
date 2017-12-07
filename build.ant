@@ -1,0 +1,28 @@
+<project name="CloudStore" default="dist">
+    <description>
+            description
+    </description>
+	
+	<target name= "init"
+	    	description = "Creates the needed directories.">
+	    	<mkdir dir = "bin" />
+	    	<mkdir dir = "dist" />
+	    </target>
+	
+    <target name= "clean"
+    	description = "Cleans up the build and dist directories.">
+    	<delete dir = "bin" />
+    	<delete dir = "dist" />
+    </target>
+
+	<target name= "compile" depends = "init"
+	    description = "Compiles the source files to the bin directory.">
+	    <javac srcdir = "src" destdir = "bin" />
+	</target>
+	
+	<target name= "dist" depends = "compile"
+	    	description = "Packages up CloudStore into CloudStore.jar.">
+	    	<jar destfile = "dist/CloudStore.jar" basedir = "bin" />
+	    </target>
+	
+</project>

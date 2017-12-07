@@ -24,16 +24,6 @@ public class User {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-		 try{
-			 out = new RandomAccessFile("UserData.txt","rw");
-			 long length = out.length();
-			 out.seek(length);
-			 out.writeBytes(userName + "\n");
-			 out.close();
-		 }
-		 catch(Exception p) {}
-		
-//		name.add(userName);
 		
 	}
 //	public static ArrayList<String> getName() {
@@ -47,14 +37,7 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.passWord = password;
-		try{
-			 out = new RandomAccessFile("UserData.txt","rw");
-			 long length = out.length();
-			 out.seek(length);
-			 out.writeBytes(password + "\n");
-			 out.close();
-		 }
-		 catch(Exception p) {}
+		
 		
 	}
 	public static void addRating(Application a, double rate){

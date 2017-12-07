@@ -1,6 +1,9 @@
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,14 +21,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.util.Scanner;
+import java.io.RandomAccessFile;
+
+import javax.swing.UIManager;
+import javax.swing.JPasswordField;
 
 
 public class LoginPage extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField userNameField;
-	private JTextField passwordField;
+	private JTextField userName;
+	private User user;
+	private JPasswordField ps;
 
 	/**
 	 * Launch the application.
@@ -60,86 +67,111 @@ public class LoginPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(Color.GRAY);
 		panel.setBounds(0, 0, 557, 466);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblLogIn = new JLabel("LOG IN");
-		lblLogIn.setBounds(292, 119, 182, 42);
-		lblLogIn.setFont(new Font("��������", Font.BOLD, 40));
-		lblLogIn.setForeground(Color.BLUE);
+		lblLogIn.setBounds(161, 48, 229, 42);
+		lblLogIn.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		lblLogIn.setForeground(Color.WHITE);
 		panel.add(lblLogIn);
 		
-		JLabel infoLogin = new JLabel("");
-		infoLogin.setBounds(260, 173, 230, 16);
-		panel.add(infoLogin);
-		
 		JLabel lblUserName = new JLabel("User Name");
-		lblUserName.setFont(new Font("����", Font.BOLD, 15));
-		lblUserName.setBounds(260, 204, 87, 18);
+		lblUserName.setForeground(Color.WHITE);
+		lblUserName.setFont(new Font("Times New Roman", Font.BOLD, 25));
+		lblUserName.setBounds(92, 143, 127, 18);
 		panel.add(lblUserName);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("����", Font.BOLD, 15));
-		lblPassword.setBounds(260, 253, 87, 18);
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Times New Roman", Font.BOLD, 25));
+		lblPassword.setBounds(92, 193, 127, 18);
 		panel.add(lblPassword);
 		
-		userNameField = new JTextField();
-		userNameField.setBounds(361, 201, 182, 24);
-		panel.add(userNameField);
-		userNameField.setColumns(10);
+		userName = new JTextField();
+		userName.setBounds(272, 144, 182, 24);
+		panel.add(userName);
+		userName.setColumns(10);
 		
-		passwordField = new JTextField();
-		passwordField.setBounds(361, 253, 182, 24);
-		panel.add(passwordField);
-		passwordField.setColumns(10);
+		ps = new JPasswordField();
+		ps.setBounds(272, 194, 182, 24);
+		panel.add(ps);
 		
 		JButton btnLogIn = new JButton("LOG IN");
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try{
-					
-				Scanner in = new Scanner(new File("UserData.txt"));
-					User user = new User();
-					while(in.hasNextLine()){
-						String username = in.nextLine();
-						String password = in.nextLine();
-						String role = in.nextLine();
-						if(username.equals(userNameField.getText()) && 
-								password.equals(passwordField.getText())){
-							if (role.equals("admin")){
-								user = new Admin(username, password);
-							}
-							else if (role.equals("admin")){
-								user = new Moderator(username, password);
-							}
-							else{
-								user = new User(username, password);
-							}
-							MainPage.mainPage(user);
-						}
-					}
-					in.close();
-					
-					
-				}
-				catch(Exception p) {
-					infoLogin.setText("Wrong username/password");
-					infoLogin.setForeground(Color.RED);
-				}
+				String name, password;
+				   boolean check = false;
+				   RandomAccessFile file = new RandomAccessFile(new File("UserData.txt"),"rw");
+				   long l = file.length();
+				   file.seek(0);
+				   long record = l / 40;
+				   for(int j = 0; j < record; j++){
+				    	 name = file.readUTF();
+				    	 for(int i = 0; i< 20 - name.length(); i++){
+				    		 file.readByte();
+				    	 }
+				    	 password = file.readUTF();
+				    	 for(int i = 0; i< 20 - password.length(); i++){
+				    		 file.readByte();
+				    	 }
+				    	 
+				    	 if(userName.getText().equals(name) && ps.getText().equals(password)){
+				    		 check = true;
+				    	 }
+				    	 if(check == true){
+				    		 user = new User();
+				    		 user.setUserName(name);
+				    		 user.setPassword(password);
+				    		 record = 0;
+				    		 close();
+				    		 MainPage nw = new MainPage(user);
+							nw.mainPage();
+				    	 }
+				   }
+				   if(check == false){
+					   LoginWrong lw = new LoginWrong();
+					   lw.loginWrong();
+				   }
+				   file.close();
+				}catch(Exception e){}
 				
-				
-			}
-		});
-		btnLogIn.setFont(new Font("����", Font.BOLD, 15));
-		btnLogIn.setBackground(Color.LIGHT_GRAY);
-		btnLogIn.setBounds(361, 308, 113, 27);
+//				user = new User();
+//				try{
+//					
+//				RandomAccessFile in = new RandomAccessFile("UserData.txt","rw");
+//					long length = in.length();
+//					for(int i = 0; i < length ; i++){
+//						if(in.readLine().equals(textField.getText())){
+//							if(in.readLine().equals(ps.getText())){
+//								break;
+//							}
+//						}
+//					}
+//					in.close();
+//					close();
+//					user.setUserName(textField.getText());
+//					user.setPassword(ps.getText());
+//					MainPage nw = new MainPage(user);
+//					nw.mainPage();
+//					
+//				}
+//				catch(Exception p) {}
+//				
+//				
+//			}
+			}});
+		btnLogIn.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnLogIn.setBackground(UIManager.getColor("Button.background"));
+		btnLogIn.setBounds(148, 266, 113, 27);
 		panel.add(btnLogIn);
 		
-		JButton btnCreateAccount = new JButton("Create Account");
-		btnCreateAccount.addActionListener(new ActionListener() {
+		JButton btnCreateAccoute = new JButton("SIGN UP");
+		btnCreateAccoute.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				close();
@@ -149,10 +181,59 @@ public class LoginPage extends JFrame {
 				
 			}
 		});
-		btnCreateAccount.setBackground(Color.LIGHT_GRAY);
-		btnCreateAccount.setFont(new Font("����", Font.BOLD, 15));
-		btnCreateAccount.setBounds(376, 426, 167, 27);
-		panel.add(btnCreateAccount);
+		btnCreateAccoute.setBackground(UIManager.getColor("Button.background"));
+		btnCreateAccoute.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnCreateAccoute.setBounds(277, 266, 113, 27);
+		panel.add(btnCreateAccoute);
+		
+		JLabel lblNewLabel_1 = new JLabel("Cloud");
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 50));
+		lblNewLabel_1.setBounds(14, 333, 173, 48);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblStore = new JLabel("Store");
+		lblStore.setFont(new Font("Times New Roman", Font.BOLD, 50));
+		lblStore.setBounds(78, 383, 127, 42);
+		panel.add(lblStore);
+		
+		JButton btnAdministor = new JButton("Administrator");
+		btnAdministor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+                close();
+				AdminLoginPage ap = new AdminLoginPage();
+				ap.adminLoginPage();
+				
+			}
+		});
+		btnAdministor.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnAdministor.setBounds(416, 426, 127, 27);
+		panel.add(btnAdministor);
+		
+		JButton btnNewButton = new JButton("Moderator");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				close();
+				ModeratorLogin ml = new ModeratorLogin();
+				ml.moderatorLogin();
+			}
+		});
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnNewButton.setBounds(416, 383, 127, 27);
+		panel.add(btnNewButton);
+		
+		
+		
+		
+		
+//		JLabel lblNewLabel = new JLabel("");
+//		Image img = new ImageIcon(this.getClass().getResource("/cloud.jpg")).getImage();
+//		lblNewLabel.setIcon(new ImageIcon(img));
+//		lblNewLabel.setBounds(0, 0, 557, 466);
+//		panel.add(lblNewLabel);
+		
+		
+		
 		
 	}
 }

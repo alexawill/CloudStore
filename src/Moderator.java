@@ -3,12 +3,14 @@ import java.util.ArrayList;
 
 public class Moderator extends User {
 	
-	public Moderator(){
-		this("","");
+	public Moderator() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public Moderator(String userName, String passWord){
-		super(userName,passWord);
+
+	public Moderator(String userName, String passWord) {
+		super(userName, passWord);
+		// TODO Auto-generated constructor stub
 	}
 	
 	public boolean deleteComment(Object a, String comment){

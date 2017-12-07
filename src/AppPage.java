@@ -31,6 +31,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -39,7 +40,8 @@ import java.io.RandomAccessFile;
 public class AppPage extends JFrame {
 
 	private JPanel contentPane;
-	public static String appname;
+	private static String appname;
+	private static User user;
 	
 	
 	/**
@@ -49,7 +51,7 @@ public class AppPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppPage frame = new AppPage(appname);
+					AppPage frame = new AppPage(appname,user);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,8 +70,9 @@ public class AppPage extends JFrame {
 	 * Create the frame.
 	 * @throws IOException 
 	 */
-	public AppPage(String app) throws IOException {
+	public AppPage(String app,User user) throws IOException {
 		this.appname = app;
+		this.user = user;
 		
 		
 		
@@ -77,120 +80,205 @@ public class AppPage extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 447, 471);
+		setBounds(100, 100, 476, 471);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblName = new JLabel("Name   :");
-		lblName.setFont(new Font("宋体", Font.BOLD, 15));
-		lblName.setForeground(new Color(0, 0, 0));
-		lblName.setHorizontalAlignment(SwingConstants.LEFT);
-		lblName.setBounds(14, 54, 72, 18);
-		contentPane.add(lblName);
+		JLabel lbname = new JLabel("Name   :");
+		lbname.setBounds(32, 54, 72, 18);
+		lbname.setFont(new Font("宋体", Font.BOLD, 15));
+		lbname.setForeground(new Color(0, 0, 0));
+		lbname.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(lbname);
 		
-		JLabel lblType = new JLabel("Type   :");
-		lblType.setFont(new Font("宋体", Font.BOLD, 15));
-		lblType.setBounds(14, 85, 72, 18);
-		contentPane.add(lblType);
+		JLabel lbtype = new JLabel("Type   :");
+		lbtype.setBounds(32, 85, 72, 18);
+		lbtype.setFont(new Font("宋体", Font.BOLD, 15));
+		contentPane.add(lbtype);
 		
-		JLabel lblPrice = new JLabel("Price  :");
-		lblPrice.setFont(new Font("宋体", Font.BOLD, 15));
-		lblPrice.setBounds(14, 116, 72, 18);
-		contentPane.add(lblPrice);
+		JLabel lbprice = new JLabel("Price  :");
+		lbprice.setBounds(32, 116, 72, 18);
+		lbprice.setFont(new Font("宋体", Font.BOLD, 15));
+		contentPane.add(lbprice);
 		
-		JLabel lblDeveloper = new JLabel("Developer  :");
-		lblDeveloper.setFont(new Font("宋体", Font.BOLD, 15));
-		lblDeveloper.setBounds(211, 54, 108, 18);
-		contentPane.add(lblDeveloper);
+		JLabel lbdeveloper = new JLabel("Developer  :");
+		lbdeveloper.setBounds(221, 54, 108, 18);
+		lbdeveloper.setFont(new Font("宋体", Font.BOLD, 15));
+		contentPane.add(lbdeveloper);
 		
-		JLabel lblPlatform = new JLabel("Platform   :");
-		lblPlatform.setFont(new Font("宋体", Font.BOLD, 15));
-		lblPlatform.setBounds(211, 85, 108, 18);
-		contentPane.add(lblPlatform);
+		JLabel lbplatform = new JLabel("Platform   :");
+		lbplatform.setBounds(221, 85, 108, 18);
+		lbplatform.setFont(new Font("宋体", Font.BOLD, 15));
+		contentPane.add(lbplatform);
 		
-		JLabel lblVersion = new JLabel("Version    :");
-		lblVersion.setFont(new Font("宋体", Font.BOLD, 15));
-		lblVersion.setBounds(211, 116, 108, 18);
-		contentPane.add(lblVersion);
+		JLabel lbversion = new JLabel("Version    :");
+		lbversion.setBounds(221, 116, 108, 18);
+		lbversion.setFont(new Font("宋体", Font.BOLD, 15));
+		contentPane.add(lbversion);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(110, 54, 72, 18);
-		contentPane.add(lblNewLabel);
+		JLabel name = new JLabel("New label");
+		name.setBounds(135, 54, 72, 18);
+		contentPane.add(name);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(333, 54, 72, 18);
-		contentPane.add(lblNewLabel_1);
+		JLabel developer = new JLabel("New label");
+		developer.setBounds(343, 54, 98, 18);
+		contentPane.add(developer);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(110, 85, 72, 18);
-		contentPane.add(lblNewLabel_2);
+		JLabel type = new JLabel("New label");
+		type.setBounds(135, 85, 72, 18);
+		contentPane.add(type);
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBounds(110, 147, 72, 18);
-		contentPane.add(lblNewLabel_3);
+		JLabel version = new JLabel("New label");
+		version.setBounds(343, 116, 72, 18);
+		contentPane.add(version);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBounds(333, 85, 72, 18);
-		contentPane.add(lblNewLabel_4);
+		JLabel download = new JLabel("New label");
+		download.setBounds(135, 147, 98, 18);
+		contentPane.add(download);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setBounds(333, 116, 72, 18);
-		contentPane.add(lblNewLabel_5);
+		JLabel platform = new JLabel("New label");
+		platform.setBounds(343, 85, 98, 18);
+		contentPane.add(platform);
 		
 		JLabel lblDescription = new JLabel("Description:");
+		lblDescription.setBounds(32, 178, 108, 18);
 		lblDescription.setFont(new Font("宋体", Font.BOLD, 15));
-		lblDescription.setBounds(24, 178, 108, 18);
 		contentPane.add(lblDescription);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setFont(new Font("宋体", Font.PLAIN, 20));
-		textPane.setEditable(false);
-		textPane.setBounds(53, 209, 310, 114);
-		contentPane.add(textPane);
-		
 		JButton btnBack = new JButton("Back");
+		btnBack.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnBack.setBounds(331, 384, 113, 27);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				close();
 			}
 		});
-		
-		btnBack.setBounds(292, 384, 113, 27);
 		contentPane.add(btnBack);
 		
-		JLabel lblDownload = new JLabel("Download :");
-		lblDownload.setFont(new Font("宋体", Font.BOLD, 15));
-		lblDownload.setBounds(14, 147, 90, 18);
-		contentPane.add(lblDownload);
+		JLabel lbdownload = new JLabel("Download :");
+		lbdownload.setBounds(32, 147, 90, 18);
+		lbdownload.setFont(new Font("宋体", Font.BOLD, 15));
+		contentPane.add(lbdownload);
 		
-		JLabel lblNewLabel_6 = new JLabel("New label");
-		lblNewLabel_6.setBounds(110, 116, 72, 18);
-		contentPane.add(lblNewLabel_6);
+		JLabel price = new JLabel("New label");
+		price.setBounds(135, 116, 72, 18);
+		contentPane.add(price);
+		
+		JButton btnViewComment = new JButton("View Comments");
+		btnViewComment.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnViewComment.setBounds(24, 384, 140, 27);
+		btnViewComment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				CommentPage cp = new CommentPage(user,appname);
+				cp.commentPage();
+			}
+		});
+		contentPane.add(btnViewComment);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(34, 209, 387, 140);
+		contentPane.add(scrollPane);
+		
+		JTextArea description = new JTextArea();
+		description.setEditable(false);
+		description.setForeground(Color.BLACK);
+		description.setLineWrap(true);
+		description.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		scrollPane.setViewportView(description);
 		
 
-		System.out.println("ky :" + appname);
-		RandomAccessFile in = new RandomAccessFile("AppsData.txt","rw");
-		long l = in.length();
+		
 		
 		try{
 			
-			for(int i = 0;i < l;i+=8){
-				String check = in.readLine();
-				if(check.equals(appname)){
-					lblNewLabel.setText(check);
-					lblNewLabel_1.setText(in.readLine());
-					textPane.setText(in.readLine());
-					lblNewLabel_2.setText(in.readLine());
-					lblNewLabel_4.setText(in.readLine());
-					lblNewLabel_5.setText(in.readLine());
-					lblNewLabel_3.setText(in.readLine());
-					in.close();
-                    break;
+			String temp,temp1;
+			boolean check = false;
+			RandomAccessFile file = new RandomAccessFile(new File("AppData.txt"),"rw");
+			long length = file.length();
+			file.seek(0);
+			long record = length / 160;
+			for(int j = 0 ; j < record && check == false ; j++){
+				temp = file.readUTF();
+				for(int i = 0 ; i < 20 - temp.length(); i++){
+					file.readByte();
+				}
+				if(temp.equals(appname)){
+					name.setText(temp);
+					
+					temp = file.readUTF();
+					for(int i = 0 ; i < 20 - temp.length(); i++){
+						file.readByte();
+					}
+					developer.setText(temp);
+					
+					temp = file.readUTF();
+					for(int i = 0 ; i < 20 - temp.length(); i++){
+						file.readByte();
+					}
+					description.setText(temp);
+					
+					temp = file.readUTF();
+					for(int i = 0 ; i < 20 - temp.length(); i++){
+						file.readByte();
+					}
+					type.setText(temp);
+					
+					temp = file.readUTF();
+					for(int i = 0 ; i < 20 - temp.length(); i++){
+						file.readByte();
+					}
+					download.setText(temp);
+					
+					temp = file.readUTF();
+					for(int i = 0 ; i < 20 - temp.length(); i++){
+						file.readByte();
+					}
+					platform.setText(temp);
+					
+					temp = file.readUTF();
+					for(int i = 0 ; i < 20 - temp.length(); i++){
+						file.readByte();
+					}
+					version.setText(temp);
+					
+					temp = file.readUTF();
+					for(int i = 0 ; i < 20 - temp.length(); i++){
+						file.readByte();
+					}
+					price.setText(temp);
+					
+					check = true;
+				}
+				
+				for(int p = 0 ; p < 7; p ++){
+					temp1 = file.readUTF();
+					for(int i = 0 ; i < 20 - temp1.length(); i++){
+						file.readByte();
+					}
 				}
 			}
+			file.close();
+			
+//			for(int i = 0;i < l;i+=8){
+//				String check = in.readLine();
+//				if(check.equals(appname)){
+//					lblNewLabel.setText(check);
+//					lblNewLabel_1.setText(in.readLine());
+//					textArea.setText(in.readLine());
+//					lblNewLabel_2.setText(in.readLine());
+//					lblNewLabel_4.setText(in.readLine());
+//					lblNewLabel_5.setText(in.readLine());
+//					lblNewLabel_3.setText(in.readLine());
+//					lblNewLabel_6.setText(in.readLine());
+//					in.close();
+//                    break;
+//				}
+//			}
 			
 		}catch(Exception e){}
 		

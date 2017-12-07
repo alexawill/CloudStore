@@ -18,15 +18,17 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.RandomAccessFile;
+import javax.swing.JPasswordField;
 
 
 public class CreatePage extends JFrame {
 
 	private JPanel contentPane;
 	private final JPanel panel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField userName;
+	private JPasswordField ps;
 
 	/**
 	 * Launch the application.
@@ -75,17 +77,11 @@ public class CreatePage extends JFrame {
 		lblNewPassword.setBounds(43, 160, 117, 18);
 		panel.add(lblNewPassword);
 		
-		textField = new JTextField();
-		textField.setText(null);
-		textField.setBounds(196, 104, 157, 24);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setText(null);
-		textField_1.setBounds(196, 157, 157, 24);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		userName = new JTextField();
+		userName.setText(null);
+		userName.setBounds(196, 104, 157, 24);
+		panel.add(userName);
+		userName.setColumns(10);
 		
 		JLabel lblSignUp = new JLabel("SIGN UP");
 		lblSignUp.setForeground(Color.BLUE);
@@ -98,44 +94,93 @@ public class CreatePage extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-//				System.out.println("Check1");
 				try{
-//					System.out.println("Check2");
-					RandomAccessFile out = new RandomAccessFile("UserData.txt","rw");
-					RandomAccessFile in = new RandomAccessFile("UserData.txt","rw");
-					long length = out.length();
-					int check = 0;
-					int check2 = 0;
-					for(int i = 0; i < length; i++){
-						String temp = in.readLine();
-						if(temp == null)	break;
-						if(temp.equals(textField.getText())){
-							check = 1;
-							break;
-						}
-						in.readLine();
-					}
-					in.close();
-					
-					String x = textField.getText() , y = textField_1.getText();
-					
-					if(!x.equals("") && !y.equals("")  && check == 0){
-					    User nuser = new User();
-					    nuser.setUserName(textField.getText());
-					    nuser.setPassword(textField_1.getText());
-					}
-					if(textField.getText().equals("") || textField_1.getText().equals("") || length == 0) {
-						check2 = 2;
-					}
-					
-					if(check == 0 && check2 == 0){
-						CreateDone c = new CreateDone();
+				
+					String name , password;
+					boolean check = true;
+				     RandomAccessFile file = new RandomAccessFile(new File("UserData.txt"),"rw");
+				     RandomAccessFile read = new RandomAccessFile(new File("UserData.txt"),"rw");
+				     long l = read.length();
+				     read.seek(0);
+				     long record = l / 40;				 
+				     if(userName.getText().length() == 0){
+			    		 check = false;
+			    	 }
+				     for(int i = 0; i < record; i++){								    	
+				    	 name = read.readUTF();				    	
+				    	 for(int j = 0; j < 20 - name.length(); j++){
+				    		read.readByte();
+				    	 }
+				    	 password = read.readUTF();				    	
+				    	 for(int j = 0; j < 20 - password.length(); j++){
+				    		 read.readByte();
+				    	 }				    					    	
+				    	 if(userName.getText().equals(name)){				    	
+				    		 check = false;
+				    		 LoginWrong1 lw = new LoginWrong1();
+				    		 lw.loginWrong1();
+				    	 }			    	 
+				     }
+				     read.close();
+				     if(check == true){
+				    	 long l1 = file.length();
+				    	 file.seek(l1);
+				    	 User nuser = new User();
+						    nuser.setUserName(userName.getText());
+						    nuser.setPassword(ps.getText());
+				        file.writeUTF(userName.getText());
+				        for(int i = 0; i < 20 - userName.getText().length(); i++){
+				    	    file.writeByte(20);
+				        }
+				        file.writeUTF(ps.getText());
+				        for(int i = 0; i < 20 - ps.getText().length(); i++){
+				    	    file.writeByte(20);
+				        }
+				        file.close();
+				        close();
+				        CreateDone c = new CreateDone();
 						c.createDone();
-					}
-					
-					
-					
+				    }			   		     
 				}catch(Exception p){}
+				
+
+//				try{
+//
+//					RandomAccessFile out = new RandomAccessFile("UserData.txt","rw");
+//					RandomAccessFile in = new RandomAccessFile("UserData.txt","rw");
+//					long length = out.length();
+//					int check = 0;
+//					int check2 = 0;
+//					for(int i = 0; i < length; i++){
+//						String temp = in.readLine();
+//						if(temp == null)	break;
+//						if(temp.equals(userName.getText())){
+//							check = 1;
+//							break;
+//						}
+//						in.readLine();
+//					}
+//					in.close();
+//					
+//					String x = userName.getText() , y = ps.getText();
+//					
+//					if(!x.equals("") && !y.equals("")  && check == 0){
+//					    User nuser = new User();
+//					    nuser.setUserName(userName.getText());
+//					    nuser.setPassword(ps.getText());
+//					}
+//					if(userName.getText().equals("") || ps.getText().equals("") || length == 0) {
+//						check2 = 2;
+//					}
+//					
+//					if(check == 0 && check2 == 0){
+//						CreateDone c = new CreateDone();
+//						c.createDone();
+//					}
+//					
+//					
+//					
+//				}catch(Exception p){}
 				
 				
 			}
@@ -158,6 +203,10 @@ public class CreatePage extends JFrame {
 		btnBack.setBackground(Color.LIGHT_GRAY);
 		btnBack.setBounds(306, 327, 113, 27);
 		panel.add(btnBack);
+		
+		ps = new JPasswordField();
+		ps.setBounds(196, 157, 157, 24);
+		panel.add(ps);
 		
 		
 	}
