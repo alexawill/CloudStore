@@ -1,0 +1,7 @@
+﻿In order to run the application:
+1. Open the project using Eclipse
+2. Run the build.ant script file included in the project: Open the build.ant file, click the run button. Select CloudStore build.ant if it asks for configuration. It will print out to the console the message if you build it successfully.
+  
+
+1. Once you run it successfully, it will create a ‘dist’ folder in your project (Try to refresh the folder if you do not see it). Inside the folder is the CloudStore.jar file. This is the file you need to run the application. The jar file can be run or opened and edited using a suitable program on the computer. Right click on the jar file, select Run As and then Run Configurations as below.   
+2. It will pop up a new window like below, make sure you are choosing CloudStore (shown in the image below) and click ‘Run’. It should successfully open the application in a new window.

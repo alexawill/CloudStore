@@ -1,0 +1,40 @@
+﻿User Guide for the CloudStore Application
+
+
+You can open the application by clicking on the CloudStore.jar file in the folder. It should pop up the window of the Login Page.
+
+
+1. The Login Page: When a user first starts the application, he or she will see two text fields labelled “username” and “password”, and three buttons labelled “login”, “sign up”, “moderator” and “administrator”. If the user is an administrator or a moderator, he or she should click the appropriate button, which will take the user to the Administrator Login Page or The Moderator Login Page. If the user has an account but is not an administrator, he or she should enter his or her username and password into the appropriate text fields, then click the login button. This will take the user to the CloudStore Home Page. If the user does not have an account, he or she should click the sign up button, which will take the user to the Create Account Page.
+  
+
+1. The Administrator Login Page: This page contains two text fields labelled “Administrator” and “Password” and two buttons labelled “login” and “back”. If the user is an administrator, he or she should enter his or her username into the administrator text field and his or her password into the password text field and click login. This will take the user to the Administrator Home Page. If the user does not wish to login as an administrator, he or she should press the back button, which will take the user to the Login Page.
+  
+
+1. The Create Account Page: This page contains two text fields labelled “New User Name” and “New Password” and two buttons. Clicking the back button will return the user to the Login Page. Entering a username and a password into the appropriate fields and pressing the other button will create a new user account with those settings, if the username entered is not already in use by an existing user.
+  
+
+1. The Administrator Home Page: This page contains 5 buttons. The “view store” button will take the administrator to the CloudStore Home Page. The “manage new request” button will take the administrator to the Request Form Management Page. The “change password” button allows the administrator to change his or her password. The “manage comments” can view all comments in apps. The “logout” button will return the administrator to the Login Page.
+  
+
+1. The CloudStore Home Page: This page contains 2 search bars and buttons labelled “enter”, “search”, “logout”, “compare” and “new request”. Entering a term into the above search bar and pressing enter will filter all the applications that match that term to appear in a list on the page. Also, you can choose which part to filter (Name, Price, etc...). You use the below search bar to search the exact name of the application. When you type an exact name of the application and press “search”, it will pop out a new window contains the detailed information of that application. Pressing logout will return the user to the Login Page. Pressing new request will take the user to the New Application Request Form. Pressing “compare” will take you to The Application Comparison Page. Also, you can click “Name”, “Price”, and etc to sort all application below.
+  
+
+1. The New Application Request Form: The New Application Request Form contains text fields for entering in information about an application, and two buttons labelled “apply” and “back”. If the user wishes to enter submit a request for a new application, he or she must enter the appropriate information into the text fields and press the apply button. If the user does not wish to submit a request, he or she can press the back button, taking the user to the CloudStore Home Page.
+  
+
+1. The Request Form Management Page: This page contains a list of all the submitted request forms that still need to be approved by an administrator. Press the name of the request on the search bar and then click the view button will take the administrator to the Check Request Form Page. Clicking the refresh button will update the list to include any changes made to the new requests since the page was loaded. Pressing the back button will return the administrator to the Administrator Home Page.
+  
+
+1. The Check Request Form Page: The Check Request Form Page displays the information about an application that a user has requested. Clicking the Accept button will cause the application to be removed from the list of new request forms and added to the applications in CloudStore. Clicking the deny button will cause the application to be removed from the list of new request forms without adding it to the applications in CloudStore. Clicking back will return the administrator to the Request Form Management Page without changing anything.
+  
+
+1. The Application Comparison Page: This page contains two drop down menus and a compare button. Selecting two applications in the drop down menus and clicking the compare button will cause information about both applications to appear side by side on the page.
+  
+
+1. The Moderator Login Page: This page contains two text fields labelled “moderator” and “password” and two buttons labelled “login” and “back”. If the user is an moderator, he or she should enter his or her username into the moderator text field and his or her password into the password text field and click login. This will take the user to the Moderator Home Page. If the user does not wish to login as an Moderator, he or she should press the back button, which will take the user to the Login Page.
+  
+
+1. The Moderator Home Page: This page contains four buttons. The “view store” button will take the administrator to the CloudStore Home Page. The “manage comment” button will take the administrator to the The Comments Deny/Accept Page. The “change password” button allows the administrator to change his or her password. The “logout” button will return the administrator to the Login Page.
+  
+
+1. The Comments Deny/Accept Page: This pages contain a “search bar” to check all application to view their comments. When you choose a application in “search bar”, you will see all comments below. Now, you can click to view which user’s comments, (click “view” button) then to view comments which you want to delete(click “view” button again). Now you can click “delete” button to delete.
